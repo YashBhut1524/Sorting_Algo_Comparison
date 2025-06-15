@@ -6,8 +6,6 @@ public class SortComparison {
     static List<String[]> csvRows = new ArrayList<>(); // rows for CSV
 
     public static void main(String[] args) {
-        // int[] powers = { 1, 2, 3, 4, 5, 6, 7 };
-
         csvRows.add(new String[] { "Size", "Algorithm", "Time (seconds)" });
 
         for (int n = 1; n <= 5; n++) {
@@ -109,29 +107,43 @@ public class SortComparison {
 
     public static void doublePivotQuickSort(int[] arr, int low, int high) {
         if (low < high) {
-            int[] pivots = partition(arr, low, high);
-            doublePivotQuickSort(arr, low, pivots[0] - 1);
-            doublePivotQuickSort(arr, pivots[0] + 1, pivots[1] - 1);
-            doublePivotQuickSort(arr, pivots[1] + 1, high);
+            int[] pivotIndexes = partitionWithTwoPivots(arr, low, high);
+
+            int leftPivotIndex = pivotIndexes[0];
+            int rightPivotIndex = pivotIndexes[1];
+
+            doublePivotQuickSort(arr, low, leftPivotIndex - 1); // elements < left pivot
+            doublePivotQuickSort(arr, leftPivotIndex + 1, rightPivotIndex - 1); // between pivots
+            doublePivotQuickSort(arr, rightPivotIndex + 1, high); // elements > right pivot
         }
     }
 
-    private static int[] partition(int[] arr, int low, int high) {
-        if (arr[low] > arr[high])
+    private static int[] partitionWithTwoPivots(int[] arr, int low, int high) {
+        if (arr[low] > arr[high]) {
             swap(arr, low, high);
-        int pivot1 = arr[low], pivot2 = arr[high];
-        int lt = low + 1, gt = high - 1, i = low + 1;
-        while (i <= gt) {
-            if (arr[i] < pivot1)
-                swap(arr, i++, lt++);
-            else if (arr[i] > pivot2)
-                swap(arr, i, gt--);
-            else
-                i++;
         }
-        swap(arr, low, --lt);
-        swap(arr, high, ++gt);
-        return new int[] { lt, gt };
+
+        int leftPivot = arr[low];
+        int rightPivot = arr[high];
+
+        int lessThanLeft = low + 1;
+        int greaterThanRight = high - 1;
+        int i = low + 1;
+
+        while (i <= greaterThanRight) {
+            if (arr[i] < leftPivot) {
+                swap(arr, i++, lessThanLeft++);
+            } else if (arr[i] > rightPivot) {
+                swap(arr, i, greaterThanRight--);
+            } else {
+                i++;
+            }
+        }
+
+        swap(arr, low, --lessThanLeft);
+        swap(arr, high, ++greaterThanRight);
+
+        return new int[] { lessThanLeft, greaterThanRight };
     }
 
     private static void swap(int[] arr, int i, int j) {
@@ -156,7 +168,7 @@ public class SortComparison {
                 writer.println(String.join(",", row));
             }
         } catch (Exception e) {
-            System.out.println("❌ Failed to write CSV: " + e.getMessage());
+            System.out.println("Failed to write CSV: " + e.getMessage());
         }
     }
 
