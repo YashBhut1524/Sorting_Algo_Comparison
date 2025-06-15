@@ -1,0 +1,31 @@
+Size,Algorithm,Time (seconds)
+10^1,Bubble Sort,0.0000
+10^1,Selection Sort,0.0000
+10^1,Merge Sort,0.0000
+10^1,QuickSort (Single),0.0000
+10^1,QuickSort (DP),0.0000
+10^1,Arrays.sort(),0.0010
+10^2,Bubble Sort,0.0000
+10^2,Selection Sort,0.0000
+10^2,Merge Sort,0.0000
+10^2,QuickSort (Single),0.0000
+10^2,QuickSort (DP),0.0000
+10^2,Arrays.sort(),0.0010
+10^3,Bubble Sort,0.0040
+10^3,Selection Sort,0.0010
+10^3,Merge Sort,0.0000
+10^3,QuickSort (Single),0.0010
+10^3,QuickSort (DP),0.0000
+10^3,Arrays.sort(),0.0010
+10^4,Bubble Sort,0.0340
+10^4,Selection Sort,0.0140
+10^4,Merge Sort,0.0010
+10^4,QuickSort (Single),0.0020
+10^4,QuickSort (DP),0.0000
+10^4,Arrays.sort(),0.0030
+10^5,Bubble Sort,8.5400
+10^5,Selection Sort,1.7310
+10^5,Merge Sort,0.0090
+10^5,QuickSort (Single),0.0060
+10^5,QuickSort (DP),0.0060
+10^5,Arrays.sort(),0.0060
